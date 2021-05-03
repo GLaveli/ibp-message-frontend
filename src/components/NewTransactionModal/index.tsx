@@ -41,23 +41,26 @@ export function NewTransactionModal({ isOpen, onRequestClose }: NewTransactionMo
  }
 
  function handleCreateNewMessage(e: FormEvent) {
-  // e.preventDefault();
+  e.preventDefault();
+
+  let newName = name;
 
   if (!isCheckedPray) {
    messageType = 0;
   }
 
+  if (newName.length <= 1) {
+   newName = 'Anonimo';
+  }
+
   const data = {
-   name,
+   name: newName,
    message,
    messageType
   };
-
+  
   api.post('message', data);
-
  }
-
-
 
 
  return (

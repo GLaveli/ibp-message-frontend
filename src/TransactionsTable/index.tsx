@@ -39,10 +39,15 @@ export function TransactionsTable() {
         <tbody>
           {messages.map((message: ApiMessage) => (
             <tr key={message.id}>
-              <td>{message.messageType ? <img className="pray" src={pray} alt='pray' /> : <img className="like" src={like} alt='like' />}</td>
+              <td>{message.messageType ?
+                <img className="pray" src={pray} alt='pray' /> :
+                <img className="like" src={like} alt='like' />}
+              </td>
               <td className="deposit">{message.name}</td>
               <td>{message.message}</td>
-              <td>{message.created_at}</td>
+              <td>{new Intl.DateTimeFormat('pt-BR').format(
+                new Date(message.created_at)
+              )}</td>
             </tr>
           ))}
 
