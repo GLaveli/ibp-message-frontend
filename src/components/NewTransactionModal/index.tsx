@@ -53,7 +53,7 @@ export function NewTransactionModal({ isOpen, onRequestClose }: NewTransactionMo
    messageType
   };
 
-  // api.post('message', data);
+  api.post('message', data);
 
  }
 
