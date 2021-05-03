@@ -22,6 +22,12 @@ td{
  color: var(--text-body);
  border-radius: 0.25rem;
 
+.pray{
+width: 45px; 
+}
+.like{
+width: 35px; 
+}
  &:first-child{
   color: var(--text-title);
  }
@@ -34,6 +40,8 @@ td{
  color: var(--red);
 }
 }
+
+
 
 }
 `

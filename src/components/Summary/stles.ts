@@ -6,6 +6,11 @@ grid-template-columns: repeat(3, 1fr);
 gap: 2rem;
 margin-top: -10rem;
 
+img{
+ width: 50px;
+}
+
+
 div{
  padding: 1.5rem 2rem;
  border-radius: 0.25rem;
@@ -18,6 +23,7 @@ div{
  }
  
  strong{
+  text-align: center;
   display: block; 
   margin-top: 2rem;
   font-size: 2rem;
