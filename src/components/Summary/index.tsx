@@ -17,7 +17,7 @@ export function Summary() {
      <p>Total de pedidos</p>
      <img src={pray} alt="Entradas" />
     </header>
-    <strong>0</strong>
+    <strong>{messages.length}</strong>
    </div>
    <div>
    </div>
