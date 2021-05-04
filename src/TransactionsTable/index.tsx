@@ -1,29 +1,14 @@
-import { useEffect, useState } from "react";
-import { api } from "../services/api";
 import { Container } from "./styles";
 
 import pray from '../assets/pray.png';
 import like from '../assets/like.png';
-
-
-interface ApiMessage {
-  id: string;
-  name: string;
-  message: string;
-  messageType: number;
-  created_at: Date;
-}
+import { useContext } from "react";
+import { MessagesContext } from "../MessagesContext";
 
 
 export function TransactionsTable() {
 
-  const [messages, setMessages] = useState([]);
-
-  useEffect(() => {
-    api.get('message')
-      .then(response => setMessages(response.data));
-  }, []);
-
+  const { messages } = useContext(MessagesContext)
 
   return (
     <Container>
@@ -37,7 +22,7 @@ export function TransactionsTable() {
           </tr>
         </thead>
         <tbody>
-          {messages.map((message: ApiMessage) => (
+          {messages.map((message) => (
             <tr key={message.id}>
               <td>{message.messageType ?
                 <img className="pray" src={pray} alt='pray' /> :

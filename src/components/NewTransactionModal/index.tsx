@@ -1,10 +1,13 @@
+import { FormEvent, useState, useContext } from "react";
 import Modal from "react-modal";
+import { api } from "../../services/api";
+import { MessagesContext } from "../../MessagesContext";
+
 import pray from '../../assets/pray.png';
 import like from '../../assets/like.png';
 
 import { Container } from "./styles";
-import { FormEvent, useState } from "react";
-import { api } from "../../services/api";
+
 
 interface NewTransactionModalProps {
  isOpen: boolean;
@@ -13,12 +16,12 @@ interface NewTransactionModalProps {
 }
 
 export function NewTransactionModal({ isOpen, onRequestClose }: NewTransactionModalProps) {
+ const { createMessage } = useContext(MessagesContext);
+
 
  const [changeTitle, setChangeTitle] = useState('Oração');
-
  const [name, setName] = useState('');
  const [message, setMessage] = useState('');
-
  const [isCheckedPray, setIsCheckedPray] = useState(true);
  const [isCheckedLike, setIsCheckedLike] = useState(false);
 
@@ -40,7 +43,7 @@ export function NewTransactionModal({ isOpen, onRequestClose }: NewTransactionMo
 
  }
 
- function handleCreateNewMessage(e: FormEvent) {
+ async function handleCreateNewMessage(e: FormEvent) {
   e.preventDefault();
 
   let newName = name;
@@ -53,13 +56,19 @@ export function NewTransactionModal({ isOpen, onRequestClose }: NewTransactionMo
    newName = 'Anonimo';
   }
 
-  const data = {
+  await createMessage({
    name: newName,
    message,
    messageType
-  };
-  
-  api.post('message', data);
+  });
+
+  setChangeTitle('Oração');
+  setName('');
+  setMessage('');
+  setIsCheckedPray(true);
+  setIsCheckedLike(false);
+
+  onRequestClose();
  }
 
 
@@ -97,7 +106,7 @@ export function NewTransactionModal({ isOpen, onRequestClose }: NewTransactionMo
      <img className="img-like" src={like} alt="like" />
     </div>
 
-    <textarea placeholder={`Digite sua mensagem de ${changeTitle} aqui!`} value={message} onChange={e => { setMessage(e.target.value) }} />
+    <textarea placeholder={`Digite sua mensagem de ${changeTitle} aqui!`} value={message} onChange={e => { setMessage(e.target.value) }} required />
     <button type="submit">Enviar mensagem!</button>
    </Container>
 

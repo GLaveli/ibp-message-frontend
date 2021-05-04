@@ -1,8 +1,13 @@
+import { useContext } from 'react';
 import pray from '../../assets/pray.png';
+import { MessagesContext } from '../../MessagesContext';
 
 import { Container } from "./stles";
 
 export function Summary() {
+
+ const { messages } = useContext(MessagesContext);
+
  return (
   <Container >
    <div>
